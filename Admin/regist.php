@@ -21,7 +21,12 @@ if (!empty($_POST)) {
     // back();
 }
 
-
+$sql = "SELECT * FROM user where username = '{$_POST['username']}'";
+$query = mysql_query($sql);
+$result = mysql_fetch_array($query,MYSQL_ASSOC);
+if(!empty($result)){
+    back('当前用户名' . $_POST['username'] . '已经存在，请更换用户名');
+}
 ?>
 
  <!DOCTYPE html>
