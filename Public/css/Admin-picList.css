@@ -1,0 +1,38 @@
+.pic {
+  clear: both;
+  width: 80%;
+  margin: 0 auto;
+}
+.pic > ul > li {
+  float: left;
+  padding: 10px;
+  border: 4px solid skyblue;
+  margin: 10px;
+  position: relative;
+}
+.pic > ul > li > a {
+  position: absolute;
+  right: 0;
+  top: 0;
+  background: red;
+  padding: 5px 10px;
+  line-height: 20px;
+  font-size: 20px;
+  font-family: "微软雅黑";
+  color: #fff;
+  display: none;
+}
+.pic > ul > li:hover a {
+  display: block;
+}
+p {
+  font-size: 18px;
+  text-align: center;
+  margin: 100px;
+}
+
+/*列表小图大小*/
+img {
+  width: 200px;
+  height: 160px;
+}
