@@ -7,25 +7,27 @@ header("content-type:text/html;charset=utf8");
 include_once '../Common/function.php';
 include_once '../Common/mysql.php';
 initDb();
+// 判断用户输入的合法性
 if (!empty($_POST)) {
-    if (empty($_POST['username'])) back('用户名密码不能为空');
-    if (empty($_POST['password'])) back('密码不能为空');
-    if (empty($_POST['password1'])) back('确认密码不能为空');
-    if($_POST['password']!== $_POST['password1']) back('两次密码不一致');
-    if(empty($_POST['mobile'])) back('手机号不能为空');
+  if (empty($_POST['username'])) back('用户名密码不能为空');
+  if (empty($_POST['password'])) back('密码不能为空');
+  if (empty($_POST['password1'])) back('确认密码不能为空');
+  if ($_POST['password'] !== $_POST['password1']) back('两次密码不一致');
+  if (empty($_POST['mobile'])) back('手机号不能为空');
 
-
-    // echo '<pre>';
-    // var_dump($_POST);
-    // echo '</pre>';
-    // back();
-}
-
-$sql = "SELECT * FROM user where username = '{$_POST['username']}'";
-$query = mysql_query($sql);
-$result = mysql_fetch_array($query,MYSQL_ASSOC);
-if(!empty($result)){
+// 判断数据的合理性 验证用户名是否重复 
+  $sql = "SELECT * FROM user WHERE username = '{$_POST['username']}' LIMIT 1";
+  $query = mysql_query($sql);
+  $result = mysql_fetch_array($query, MYSQLI_ASSOC);
+  if (!empty($result)) {
     back('当前用户名' . $_POST['username'] . '已经存在，请更换用户名');
+  }
+
+//  echo '<pre>';
+//     var_dump($user);
+//     echo '</pre>';
+//     exit();
+
 }
 ?>
 
