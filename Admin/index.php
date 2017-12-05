@@ -9,6 +9,7 @@ header("content-type:text/html;charset=utf8");
 require_once '../Common/function.php';
 include_once '../Common/mysql.php';
 initDb();
+@session_start();//开启本地存储
 
 ?>
 
@@ -23,7 +24,7 @@ initDb();
 <body>
 <div class="top">
   <h2>后台首页</h2>
-  <span>欢迎<b>admin</b>登录后台</span>
+  <span>欢迎<?php echo isset($_SESSION['username']) ? $_SESSION['username'] : '';?>登录后台</span>
 </div>
 <div class="nav">
   <ul>
