@@ -29,7 +29,18 @@ eof;
     //  跳转提示功能
     header("Refresh:{$time};url='{$url}'");
     echo $msg . "系统将在{$time}秒之后自动跳转到{$url}!";
-    // 
+    // 停止运行
     exit();
  }
+
+ /**
+  * 检查用户是否登录
+  */
+ function checkLogin(){
+     @session_start();
+     if(!isset($_SESSION['username'])|| !isset($_SESSION['user_id'])){
+         jump('暂未登录，请先去登录','Admin/login.php',3);
+     }
+ }
+
 ?>

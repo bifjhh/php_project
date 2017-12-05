@@ -9,7 +9,7 @@ header("content-type:text/html;charset=utf8");
 require_once '../Common/function.php';
 include_once '../Common/mysql.php';
 initDb();
-@session_start();//开启本地存储
+checkLogin();
 
 ?>
 
