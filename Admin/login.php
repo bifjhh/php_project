@@ -23,8 +23,8 @@ if (!empty($_POST)) {
     };
   // 密码匹配成功 则 将用户信息持久化
     @session_start();//开启本地存储
-    $SESSION['username'] = $info['username'];
-    $SESSION['user_id'] = $info['user_id'];
+    $_SESSION['username'] = $info['username'];
+    $_SESSION['user_id'] = $info['user_id'];
     jump('登录成功', 'Admin', 3);
   } else {
     back('用户名不存在');
