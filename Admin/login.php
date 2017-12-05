@@ -5,8 +5,19 @@
  */
 header("content-type:text/html;charset=utf8");
 include_once '../Common/mysql.php';
+include_once '../Common/function.php';
 initDb();
+if(!empty($_POST)){
+  // 判断用户输入的合法性
+  if(empty($_POST['username'])) back('用户名不能为空');
+  
+  if(empty($_POST['password'])) back('密码不能为空');
 
+  // echo '<pre>';
+  // var_dump($_POST);
+  // echo '</pre>';
+  // exit();
+}
 ?>
  <!DOCTYPE html>
  <html lang="en">
