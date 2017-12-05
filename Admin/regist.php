@@ -22,7 +22,20 @@ if (!empty($_POST)) {
   if (!empty($result)) {
     back('当前用户名' . $_POST['username'] . '已经存在，请更换用户名');
   }
+  // 组合数据，将用户信息写入数据库
+  $_POST['password'] = md5($_POST['password']);
+  // 返回当前时间的 Unix 时间戳，并格式化为日期：
+  $now = time();
+  $sql = "INSERT INTO user VALUES (null,'{$_POST['username']}','{$_POST['password']}','{$_POST['email']}','{$_POST['mobile']}',{$now})";
 
+// 将组合好的数据指令发送到mysql数据库
+  $result = mysql_query($sql);
+
+  if ($result) {
+    jump('注册成功', 'Admin',3);
+  } else {
+    jump('注册失败', 'Admin/regist.php', 3);
+  }
 //  echo '<pre>';
 //     var_dump($user);
 //     echo '</pre>';
