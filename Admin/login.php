@@ -53,7 +53,7 @@ if (!empty($_POST)) {
         <div class="btn">
           <input type="reset" />
           <input type="submit" value="登录" />
-          <a href="regist.html">没有账号？点击注册</a>
+          <a href="regist.php">没有账号？点击注册</a>
         </div>
       </form>
     </div>
