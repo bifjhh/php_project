@@ -34,5 +34,15 @@ function findAll($sql)
 	}
 }
 
+/**
+ * 查找一条数据
+ * @param string $sql SQL语句
+ * @return array 查询结果 一维数组
+ */
+function find($sql){
+	$query=mysql_query($sql);
+	return mysql_fetch_array($query,MYSQL_ASSOC);
+}
+
 
 ?>
