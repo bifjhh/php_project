@@ -7,12 +7,28 @@ header("content-type:text/html;charset=utf8");
 include_once '../Common/mysql.php';
 include_once '../Common/function.php';
 initDb();
-if(!empty($_POST)){
+if (!empty($_POST)) {
   // 判断用户输入的合法性
-  if(empty($_POST['username'])) back('用户名不能为空');
-  
-  if(empty($_POST['password'])) back('密码不能为空');
+  if (empty($_POST['username'])) back('用户名不能为空');
 
+  if (empty($_POST['password'])) back('密码不能为空');
+// 根据用户名查询用户信息
+  $sql = "SELECT * FROM user WHERE username = '{$_POST['username']}'";
+  $query = mysql_query($sql);
+  $info = mysql_fetch_array($query, MYSQL_ASSOC);
+  if (!empty($info)) {
+  // 查询到用户 需要校验密码
+    if (md5($_POST['password']) !== $info['password']) {
+      back('密码错误');
+    };
+  // 密码匹配成功 则 将用户信息持久化
+    @session_start();//开启本地存储
+    $SESSION['username'] = $info['username'];
+    $SESSION['user_id'] = $info['user_id'];
+    jump('登录成功', 'Admin', 3);
+  } else {
+    back('用户名不存在');
+  }
   // echo '<pre>';
   // var_dump($_POST);
   // echo '</pre>';
