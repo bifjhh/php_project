@@ -35,7 +35,7 @@ initDb();
    <li><a href="nav.html">导航列表</a></li>
    <li><a href="addPics.html">上传图片</a></li>
    <li><a href="picList.html">相册列表</a></li>
-   <li><a href="logout.html">退出后台</a></li>
+   <li><a href="logout.php" onclick="if(!confirm('确定退出登录吗？')){return false}">退出后台</a></li>
   </ul>
 </div>
 <div class="banner"><img src="../Public/img/index_banner.jpg" height="900" width="1440" alt=""></div>
