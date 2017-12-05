@@ -4,6 +4,19 @@
  * 后台新闻列表功能
  */
 header("content-type:text/html;charset=utf8");
+include_once '../Common/function.php';
+include_once '../Common/mysql.php';
+checkLogin();
+initDb();
+
+$sql = "SELECT * FROM news WHERE user_id = {$_SESSION['user_id']}";
+$result = findAll($sql);
+$sql = "SELECT n.*,u.username FROM news as n LEFT JOIN user as u on n.user_id = u.user_id WHERE n.user_id = {$_SESSION['user_id']}";
+$result = findAll($sql);
+// echo '<pre>';
+// var_dump($result);
+// echo '</pre>';
+// exit();
 
 ?>
 <!DOCTYPE html>
@@ -40,35 +53,28 @@ header("content-type:text/html;charset=utf8");
     <td><label for="txtname">发布时间</label></td>
     <td><label for="txtname">操作</label></td>
   </tr>
-
+  <?php
+    if (!empty($result)) {
+        foreach ($result as $k => $v) {
+            ?>        
   <tr>
-    <td><label for="txtname">1</label></td>
-    <td><label for="txtname">小米Max手机</label></td>
-    <td><label for="txtname">小米，为发烧而生</label></td>
-    <td><label for="txtname">admin</label></td>
-    <td><label for="txtname">2017年7月19日15:49:38</label></td>
-    <td><label for="txtname">&nbsp;<a href="detail.php?news_id=1">查看</a> | <a href="editNews.php?news_id=1">修改</a> | <a href="delNews.php?news_id=1" onclick="if(!confirm('确定删除该新闻吗？')){return false;}">删除</a></label></td>
+    <td><label for="txtname"><?php echo $v['news_id']; ?></label></td>
+    <td><label for="txtname"><?php echo $v['title']; ?></label></td>
+    <td><label for="txtname"><?php echo $v['content']; ?></label></td>
+    <td><label for="txtname"><?php echo $v['username']; ?></label></td>
+    <td><label for="txtname"><?php echo date('Y-m-d H:i:s', $v['addtime']); ?></label></td>
+    <td><label for="txtname">&nbsp;<a href="detail.php?news_id=<?php echo $v['news_id']; ?>">查看</a> | <a href="editNews.php?news_id=<?php echo $v['news_id']; ?>">修改</a> | <a href="delNews.php?news_id=<?php echo $v['news_id']; ?>" onclick="if(!confirm('确定删除该新闻吗？')){return false;}">删除</a></label></td>
   </tr>
+ <?php 
+}
+} else { ?>
   <tr>
-    <td><label for="txtname">1</label></td>
-    <td><label for="txtname">小米Max手机</label></td>
-    <td><label for="txtname">小米，为发烧而生</label></td>
-    <td><label for="txtname">admin</label></td>
-    <td><label for="txtname">2017年7月19日15:49:38</label></td>
-    <td><label for="txtname">&nbsp;<a href="detail.php?news_id=1">查看</a> | <a href="editNews.php?news_id=1">修改</a> | <a href="delNews.php?news_id=1" onclick="if(!confirm('确定删除该新闻吗？')){return false;}">删除</a></label></td>
-  </tr>
-  <tr>
-    <td><label for="txtname">1</label></td>
-    <td><label for="txtname">小米Max手机</label></td>
-    <td><label for="txtname">小米，为发烧而生</label></td>
-    <td><label for="txtname">admin</label></td>
-    <td><label for="txtname">2017年7月19日15:49:38</label></td>
-    <td><label for="txtname">&nbsp;<a href="detail.php?news_id=1">查看</a> | <a href="editNews.php?news_id=1">修改</a> | <a href="delNews.php?news_id=1" onclick="if(!confirm('确定删除该新闻吗？')){return false;}">删除</a></label></td>
-  </tr>
-
-  <!-- <tr>
     <td colspan="6"><label for="txtname">暂无新闻</label></td>
-  </tr> -->
+  </tr>
+  <?php 
+} ?>
+
+
 </table>
 </div>
 </body>
