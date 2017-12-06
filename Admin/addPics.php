@@ -18,8 +18,12 @@ if (!empty($_FILES)) {
         if ($res) {
             // 将图片地址存入到数据库
             $now = time();
-            $sql = "INSERT INTO pics VALUES (nll,'{$newPicName}',{$now})";
+            $sql = "INSERT INTO pics VALUES (nUll,'{$newPicName}',{$now})";
             mysql_query($sql);
+            echo '<pre>';
+            var_dump($sql);
+            echo '</pre>';
+            exit();
             jump('上传成功', 'Admin/picList.php', 3);
         } else {
             back('上传失败');
@@ -46,14 +50,14 @@ if (!empty($_FILES)) {
 </div>
 <div class="nav">
  <ul>
-   <li><a href="index.html">后台首页</a></li>
-   <li><a href="addNews.html">发布文章</a></li>
-   <li><a href="list.html">文章列表</a></li>
-   <li><a href="addNav.html">导航添加</a></li>
-   <li><a href="nav.html">导航列表</a></li>
-   <li><a href="addPics.html">上传图片</a></li>
-   <li><a href="picList.html">相册列表</a></li>
-   <li><a href="logout.html">退出后台</a></li>
+   <li><a href="index.php">后台首页</a></li>
+   <li><a href="addNews.php">发布文章</a></li>
+   <li><a href="list.php">文章列表</a></li>
+   <li><a href="addNav.php">导航添加</a></li>
+   <li><a href="nav.php">导航列表</a></li>
+   <li><a href="addPics.php">上传图片</a></li>
+   <li><a href="picList.php">相册列表</a></li>
+   <li><a href="logout.php">退出后台</a></li>
  </ul>
 </div>
 <div class="main">
