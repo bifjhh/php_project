@@ -20,10 +20,7 @@ if (!empty($_FILES)) {
             $now = time();
             $sql = "INSERT INTO pics VALUES (nUll,'{$newPicName}',{$now})";
             mysql_query($sql);
-            echo '<pre>';
-            var_dump($sql);
-            echo '</pre>';
-            exit();
+            
             jump('上传成功', 'Admin/picList.php', 3);
         } else {
             back('上传失败');
